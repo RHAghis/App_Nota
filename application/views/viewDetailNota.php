@@ -36,19 +36,19 @@
     <?php $this->load->view('menu'); ?>
 
     <!-- ===============================END MENU================================ -->
-	<!-- Breadcomb area Start-->
-	<div class="breadcomb-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="breadcomb-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="breadcomb-wp">
-									<div class="breadcomb-icon">
-										<i class="notika-icon notika-windows"></i>
-									</div>
-									<div class="breadcomb-ctn">
+    <!-- Breadcomb area Start-->
+    <div class="breadcomb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcomb-list">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcomb-wp">
+                                    <div class="breadcomb-icon">
+                                        <i class="notika-icon notika-windows"></i>
+                                    </div>
+                                    <div class="breadcomb-ctn">
                                         <table class="table">
                                             <tr>
                                                 <td><h1>No. Nota </h1></td>
@@ -65,22 +65,22 @@
                                                 <td> : </td>
                                                 <td><?php echo $nota[0]->nama_cust; ?></td>
                                             </tr>
-                                        </table>									
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-								<div class="breadcomb-report">
-									<a href="<?php echo site_url('Nota/printNota') ?>/<?php echo $nota[0]->no_nota; ?>" target="_blank"><button class="btn notika-btn-orange waves-effect">Print</button></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcomb area End-->
+                                        </table>                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+                                <div class="breadcomb-report">         
+                                    <a href="<?php echo site_url('Nota/printNota') ?>/<?php echo $nota[0]->no_nota; ?>" target="_blank"><button class="btn notika-btn-orange waves-effect">Print</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcomb area End-->
 
     <!-- Form Detail Start-->
     <div class="breadcomb-area">
@@ -98,7 +98,6 @@
                                 <div class="form-group ic-cmp-int col-lg-12">
                                     <div class="nk-int-st">
                                         <input type="text" id="no_nota" name="no_nota" class="form-control" value="<?php echo $nota[0]->no_nota; ?>" hidden>
-                                        <input type="text" id="no" name="no" class="form-control" value="<?php $no = $numb[0]->no; echo $no + 1; ?>" hidden>
                                     </div>
                                 </div>
                                 <div class="form-group ic-cmp-int col-lg-12">
@@ -106,7 +105,7 @@
                                         <i class="notika-icon notika-dollar"></i>
                                     </div>
                                     <div class="nk-int-st">
-                                        <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang">
+                                        <input type="text" maxlength="50" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang">
                                     </div>
                                 </div>
                                 <div class="form-group ic-cmp-int col-lg-12">
@@ -165,17 +164,18 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                        $no=1;
                                         $total = 0;
                                         foreach ($detail_list as $list) {
                                     ?>
 
                                     <tr>
-                                        <td><?php echo $list->no ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><?php echo $list->nama_barang ?></td>
                                         <td><?php echo $list->qty ?></td>
                                         <td>Rp <?php echo number_format($list->harga) ?></td>
                                         <td>Rp <?php echo number_format($list->jumlah) ?></td>
-                                        <td>
+                    <td>
                                             <div class="button-icon-btn button-icon-btn-cl sm-res-mg-t-30">
                                                 <a class="tmbl-hapus" href="<?php echo site_url() ?>/Nota/delDetailNota/<?php echo $list->no; ?>/<?php echo $nota[0]->no_nota; ?>"><button class="btn btn-danger danger-icon-notika" ><i class="notika-icon notika-trash"></i></button></a>
                                             </div>

@@ -6,19 +6,14 @@ class Nota extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Nota_model');
 		//Do your magic here
+		$this->load->model('Nota_model');
 	}
 
 	public function index()
 	{
-		$data['aktif'] 	= 'nota';
-		$data["nota_list"] = $this->Nota_model->getDataNota();
-		$this->load->view('viewDataNota', $data);
-	}
-
-	public function viewNota()
-	{
+		$data['nota']=$this->Nota_model->getNoNota();
+		$data["cust_list"] = $this->Nota_model->getDataCustCB();
 		$data['aktif'] 	= 'nota';
 		$data["nota_list"] = $this->Nota_model->getDataNota();
 		$this->load->view('viewDataNota', $data);
@@ -26,13 +21,37 @@ class Nota extends CI_Controller {
 
 	public function addNota()
 	{
-		$this->load->view('viewAddNota');
+		$this->form_validation->set_rules('titip', 'Titip', 'trim|required');
+        if ($this->form_validation->run()==FALSE)
+        {
+            $this->load->view('viewDataNota');
+        }
+        else
+        {           
+            $this->Nota_model->addDataNota();
+            $this->session->set_flashdata('flash','Insert Data Berhasil');
+            redirect('Nota');
+        }
+		// $this->load->view('viewAddNota');
+	}
+
+	public function editNota($no_nota)
+	{
+		if(isset($_POST['submit'])){
+            
+            $update =  $this->Nota_model->editNota($no_nota);
+            $this->session->set_flashdata('flash','Update Data Berhasil');
+            redirect('Nota');
+        }else{
+        	$data['aktif'] 	= 'nota';
+			$data['nota'] = $this->Nota_model->getDataNotaWithNo($no_nota);
+			$this->load->view('viewUpdateNota', $data);
+        }
 	}
 
 	public function delNota($no_nota)
 	{
 		$data["nota_list"] = $this->Nota_model->delNota($no_nota);
-		$this->Nota_model->delDetailAll();
         $this->session->set_flashdata('flash','Hapus Nota Berhasil');
         redirect('Nota', 'refresh');
 	}
@@ -42,11 +61,8 @@ class Nota extends CI_Controller {
 	public function viewDetail($no_nota)
 	{
 		$data['nota'] = $this->Nota_model->getDataNotaWithNo($no_nota);
-
 		$data['aktif'] 	= 'nota';
 		$data["detail_list"] = $this->Nota_model->getDataDetail();
-		$data["numb"] = $this->Nota_model->generateNoDetail();
-
 		$this->load->view('viewDetailNota', $data);
 	}
 
@@ -64,13 +80,12 @@ class Nota extends CI_Controller {
         	$this->load->view('viewDetail',$data);
         }	
 	}
-
+	
 	public function delDetailNota($no, $no_nota)
 	{
-		// $no_nota = $this->input->post('no_nota');
-		$data["detail_list"] = $this->Nota_model->delDetail($no);
-        $this->session->set_flashdata('flash','Hapus Data Berhasil');
-        redirect('Nota/viewDetail/'.$no_nota,'refresh');
+		$data["detail_list"] = $this->Nota_model->delDetail($no, $no_nota);
+        	$this->session->set_flashdata('flash','Hapus Data Berhasil');
+        	redirect('Nota/viewDetail/'.$no_nota,'refresh');
 	}
 
 	public function printNota($no_nota)
@@ -83,5 +98,5 @@ class Nota extends CI_Controller {
 
 }
 
-/* End of file Customers.php */
-/* Location: ./application/controllers/Customers.php */
+/* End of file Nota.php */
+/* Location: ./application/controllers/Nota.php */
