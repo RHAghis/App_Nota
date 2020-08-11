@@ -79,3 +79,7 @@
 <script src="<?php echo base_url() ?>/assets/js/dialog/sweetalert2.min.js"></script>
 <script src="<?php echo base_url() ?>/assets/js/dialog/dialog-active.js"></script>
 <script src="<?php echo base_url() ?>/assets/js/dialog/myScript.js"></script>
+<!--  Chart JS
+	============================================ -->
+<script src="<?php echo base_url() ?>/assets/chart-js/Chart.js"></script>
+<script src="<?php echo base_url() ?>/assets/chart-js/Chart.min.js"></script>

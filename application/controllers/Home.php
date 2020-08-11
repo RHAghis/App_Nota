@@ -6,12 +6,15 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Home_model');
 		//Do your magic here
 	}
 
 	public function index()
 	{
 		$data['aktif'] 	= 'home';
+		$data['totalPerBulan'] = $this->Home_model->getTotalPerBulan();
+		
 		$this->load->view('viewIndex', $data);
 		
 	}
